@@ -1,4 +1,5 @@
 .venv
 .mp3
-/StimuliSamples
+.wav
+/FinalWav
 .toml
