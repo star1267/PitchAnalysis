@@ -4,72 +4,71 @@ import numpy as np
 
 
 def plotmeans(dict): 
-    #// TODO I think this can be changed into a for loop?? 
 
-    GibBella = [] 
-    GibClancy= []
-    GibMatt  = []
-    GibRiver = []
+    names = ["Bella", "Clancy", "Matt", "River"] #Name of the three voices we are using 
+    Gibstdmean   = [[],[],[],[]]
+    Gibmean   = [[],[],[],[]]
+    Gibmedian = [[],[],[],[]]
+    Gibstdmedian= [[],[],[],[]]
+    Ieeemean = [[],[],[],[]]
+    Ieeemedian  = [[],[],[],[]]
+    Ieeestdmean  = [[],[],[],[]]
+    Ieeestdmedian  = [[],[],[],[]]
 
-    IeeeBella = []
-    IeeeClancy= []
-    IeeeMatt  = []
-    IeeeRiver = []
-    
-    
-    for line in dict: 
-            fmean   = line ['meanPitch']
-            fmedian = line ['MedianPitch']
-            fname = (line ['filename'])
-            fmean = int(float(fmean))
-            fmedian=int(float(fmedian))
+    GibMeanSpeaker    = [[],[],[],[]]
+    GibMedianSpeaker  = [[],[],[],[]]
+    IeeeMeanSpeaker   = [[],[],[],[]]
+    IeeeMedianSpeaker = [[],[],[],[]]
 
+    for n in range(len(names)): #loops through the different speakers names
+        for line in dict: #Loops through each row of the dictionary 
+                fmean   = int(float(line['meanPitch'])) #extract mean F0 value
+                fmedian = int(float(line ['MedianPitch'])) #extract median F0 
+                fname = (line ['filename']) #extract file name 
 
-            if "Gib" in fname: 
-                if "Bella" in fname: 
-                    GibBella.append (fmean)
-                elif "Clancy" in fname: 
-                    GibClancy.append (fmean)
-                elif "Matt" in fname: 
-                    GibMatt.append (fmean)
-                elif "River" in fname: 
-                    GibRiver.append (fmean)
+                if "Gib" in fname: #checks if its a gibberish file 
+                    if names[n] in fname: #Loops 
+                        GibMeanSpeaker[n].append (fmean) #creates variable of all the F0 means for this speaker 
+                        GibMedianSpeaker[n].append(fmedian)#creates variable of all the F0 medians for this speaker 
+                        ... 
 
-            elif "IEEE" in fname: 
-                if "Bella" in fname: 
-                    IeeeBella.append (fmean)
-                elif "Clancy" in fname: 
-                    IeeeClancy.append (fmean)
-                elif "Matt" in fname: 
-                    IeeeMatt.append (fmean)
-                elif "River" in fname: 
-                    IeeeRiver.append (fmean)
+                elif "IEEE" in fname: #checks if its an ieee file 
+                    if names[n] in fname: 
+                        IeeeMeanSpeaker[n].append (fmean)
+                        IeeeMedianSpeaker[n].append(fmedian)
+                        ... 
+        ...              
+        print (n)
+        Gibmean[n] = np.mean(GibMeanSpeaker[n])
+        Ieeemean[n]= np.mean(IeeeMeanSpeaker[n])
+        Gibstdmean[n] = np.std(GibMeanSpeaker[n])
+        Ieeestdmean[n]= np.std(IeeeMeanSpeaker[n])
 
-    plt.figure
-    plot (GibBella,GibClancy, GibMatt , GibRiver, "Gibberish Means" )
-    plt.figure
-    plot (IeeeBella,IeeeClancy, IeeeMatt , IeeeRiver, "IEEE Means" )
+        Gibmedian[n] = np.mean(GibMedianSpeaker[n])
+        Ieeemedian[n]= np.mean(IeeeMedianSpeaker[n])
+        Gibstdmedian[n] = np.std(GibMedianSpeaker[n])
+        Ieeestdmedian[n]= np.std(IeeeMedianSpeaker[n])
 
-    ... 
+    fig= plt.figure
+    plt.subplot(1, 2, 1)
+    plot( Gibmean,Gibstdmean, Ieeemean, Ieeestdmean, names ,"Mean F0") 
+    plt.show
 
-def plot (Bella, Clancy, Matt, River, Title): 
-    x = 1,2,3,4 
-    GibelPlot= np.mean(Bella)
-    GibmattPlot= np.mean(Matt)
-    GibclancyPlot= np.mean(Clancy)
-    GibriverPlot= np.mean(River)
-    
+    plt.subplot(1, 2, 2)
+    plot(Gibmedian,Gibstdmedian, Ieeemedian, Ieeestdmedian, names, "Median F0" )
+    print ()
+    return (fig)
 
-    GibelSD= np.std(Bella)
-    GibmattSD= np.std(Matt)
-    GibclancySd= np.std(Clancy)
-    GibriverSd= np.std(River)
-
-    y = GibelPlot, GibmattPlot, GibclancyPlot, GibriverPlot
-    eer =  GibelSD, GibmattSD, GibclancySd, GibriverSd
-
-    plt.bar(x,y)
-    plt.errorbar(x, y, yerr=eer, fmt="o", color="r")
+def plot (Gibdata, Gibstd, Ieeedata, Ieeestd,names, Title): 
+    x = [1,2,3,4]
+    plt.plot(x,Gibdata, color="r")
+    plt.errorbar(x, Gibdata, yerr=Gibstd, fmt="o", color="r")
+    plt.plot(x,Ieeedata, color="b")
+    plt.errorbar(x, Ieeedata, yerr=Ieeestd, fmt="o", color="b")
+    plt.xlabel("Speaker")
     plt.title(Title)
-    plt.show()
+    plt.xticks(x, names)
+    plt.legend(['Gibberish', 'IEEE']) 
     ... 
+
+    

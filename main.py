@@ -25,7 +25,8 @@ if __name__ == "__main__":
 
     #outliers=meanMedian(dict)
 
-    plotmeans(dict)
+    fig = plotmeans(dict)
+
 
 
 
