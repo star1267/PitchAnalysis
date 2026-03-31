@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-
+#// TODO rewrite this in a way that makes more sense 
 
 def plotmeans(dict): 
 
@@ -27,29 +27,28 @@ def plotmeans(dict):
                 fname = (line ['filename']) #extract file name 
 
                 if "Gib" in fname: #checks if its a gibberish file 
-                    if names[n] in fname: #Loops 
+                    if names[n] in fname: #checks if this file is the current name
                         GibMeanSpeaker[n].append (fmean) #creates variable of all the F0 means for this speaker 
                         GibMedianSpeaker[n].append(fmedian)#creates variable of all the F0 medians for this speaker 
                         ... 
-
                 elif "IEEE" in fname: #checks if its an ieee file 
-                    if names[n] in fname: 
-                        IeeeMeanSpeaker[n].append (fmean)
-                        IeeeMedianSpeaker[n].append(fmedian)
+                    if names[n] in fname: #checks if this file is the current name
+                        IeeeMeanSpeaker[n].append (fmean) #stores mean 
+                        IeeeMedianSpeaker[n].append(fmedian) #stores median
                         ... 
         ...              
         print (n)
-        Gibmean[n] = np.mean(GibMeanSpeaker[n])
-        Ieeemean[n]= np.mean(IeeeMeanSpeaker[n])
-        Gibstdmean[n] = np.std(GibMeanSpeaker[n])
-        Ieeestdmean[n]= np.std(IeeeMeanSpeaker[n])
+        Gibmean[n] = np.mean(GibMeanSpeaker[n]) #average mean F0 for this voice 
+        Ieeemean[n]= np.mean(IeeeMeanSpeaker[n]) #average mean F0 for this voice 
+        Gibstdmean[n] = np.std(GibMeanSpeaker[n]) #std 
+        Ieeestdmean[n]= np.std(IeeeMeanSpeaker[n])#std
 
         Gibmedian[n] = np.mean(GibMedianSpeaker[n])
         Ieeemedian[n]= np.mean(IeeeMedianSpeaker[n])
         Gibstdmedian[n] = np.std(GibMedianSpeaker[n])
         Ieeestdmedian[n]= np.std(IeeeMedianSpeaker[n])
 
-    fig= plt.figure
+    fig= plt.figure 
     plt.subplot(1, 2, 1)
     plot( Gibmean,Gibstdmean, Ieeemean, Ieeestdmean, names ,"Mean F0") 
     plt.show
