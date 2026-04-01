@@ -1,6 +1,6 @@
 .venv
-.mp3
-.wav
-/FinalWav
-.toml
-/Shifted
+**/*.mp3
+**/*.wav
+**/*.png
+**/*.csv
+**/*.json

@@ -5,7 +5,7 @@ import numpy as np
 
 def plotmeans(dict): 
 
-    names = ["Bella", "Clancy", "Matt", "River"] #Name of the three voices we are using 
+    names = ["Bella", "River", "Clancy", "Matt" ] #Name of the three voices we are using 
     Gibstdmean   = [[],[],[],[]]
     Gibmean   = [[],[],[],[]]
     Gibmedian = [[],[],[],[]]
@@ -55,8 +55,10 @@ def plotmeans(dict):
 
     plt.subplot(1, 2, 2)
     plot(Gibmedian,Gibstdmedian, Ieeemedian, Ieeestdmedian, names, "Median F0" )
-    print ()
+    plt.savefig('Plot.png')
+    #print (Gibmean,Ieeemean )
     return (fig)
+
 
 def plot (Gibdata, Gibstd, Ieeedata, Ieeestd,names, Title): 
     x = [1,2,3,4]
@@ -65,6 +67,7 @@ def plot (Gibdata, Gibstd, Ieeedata, Ieeestd,names, Title):
     plt.plot(x,Ieeedata, color="b")
     plt.errorbar(x, Ieeedata, yerr=Ieeestd, fmt="o", color="b")
     plt.xlabel("Speaker")
+    plt. ylim (80, 240)
     plt.title(Title)
     plt.xticks(x, names)
     plt.legend(['Gibberish', 'IEEE']) 
