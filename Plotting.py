@@ -1,5 +1,9 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
+from pandas import Index
+import dataframe_image as dfi
+
 
 #// TODO rewrite this in a way that makes more sense 
 
@@ -37,16 +41,15 @@ def plotmeans(dict):
                         IeeeMedianSpeaker[n].append(fmedian) #stores median
                         ... 
         ...              
-        print (n)
-        Gibmean[n] = np.mean(GibMeanSpeaker[n]) #average mean F0 for this voice 
-        Ieeemean[n]= np.mean(IeeeMeanSpeaker[n]) #average mean F0 for this voice 
-        Gibstdmean[n] = np.std(GibMeanSpeaker[n]) #std 
-        Ieeestdmean[n]= np.std(IeeeMeanSpeaker[n])#std
+        Gibmean[n] = round(np.mean(GibMeanSpeaker[n]), 2) #average mean F0 for this voice 
+        Ieeemean[n]= round(np.mean(IeeeMeanSpeaker[n]), 2) #average mean F0 for this voice 
+        Gibstdmean[n] = round(np.std(GibMeanSpeaker[n]), 2) #std 
+        Ieeestdmean[n]= round(np.std(IeeeMeanSpeaker[n]), 2)#std
 
-        Gibmedian[n] = np.mean(GibMedianSpeaker[n])
-        Ieeemedian[n]= np.mean(IeeeMedianSpeaker[n])
-        Gibstdmedian[n] = np.std(GibMedianSpeaker[n])
-        Ieeestdmedian[n]= np.std(IeeeMedianSpeaker[n])
+        Gibmedian[n] = round(np.mean(GibMedianSpeaker[n]), 2)
+        Ieeemedian[n]= round(np.mean(IeeeMedianSpeaker[n]), 2)
+        Gibstdmedian[n] = round(np.std(GibMedianSpeaker[n]), 2)
+        Ieeestdmedian[n]= round(np.std(IeeeMedianSpeaker[n]), 2)
 
     fig= plt.figure 
     plt.subplot(1, 2, 1)
@@ -56,8 +59,30 @@ def plotmeans(dict):
     plt.subplot(1, 2, 2)
     plot(Gibmedian,Gibstdmedian, Ieeemedian, Ieeestdmedian, names, "Median F0" )
     plt.savefig('Plot.png')
-    #print (Gibmean,Ieeemean )
+
+
+    
+
+    table = { 'Name': [names[0], names[1], names[2], names[3]], 
+    'Giberish Mean': [Gibmean[0], Gibmean[1], Gibmean[2], Gibmean[3]],
+    'Giberish Median': [Gibmedian[0], Gibmedian[1], Gibmedian[2], Gibmedian[3]], 
+    'Giberish Std mean':  [Gibstdmean[0], Gibstdmean[1], Gibstdmean[2], Gibstdmean[3]], 
+    'IEEE Mean ': [Ieeemean[0], Ieeemean[1], Ieeemean[2], Ieeemean[3]], 
+     'IEEE Median': [Ieeemedian[0], Ieeemedian[1], Ieeemedian[2], Ieeemedian[3]],  
+     'IEEE Std Mean':  [Ieeestdmean[0], Ieeestdmean[1], Ieeestdmean[2], Ieeestdmean[3]],
+     }
+
+    df = pd.DataFrame(table)
+
+    dfi.export(df, 'Table.png')
     return (fig)
+
+
+
+
+
+
+
 
 
 def plot (Gibdata, Gibstd, Ieeedata, Ieeestd,names, Title): 

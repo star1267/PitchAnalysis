@@ -1,5 +1,4 @@
 import os 
-#// TODO make different dicts for each voice 
 def load_audio_files(foldername, names):
     """ This function creates a list of all the Mp3s in a folder"""
     audio_files = [] #empty list
@@ -11,7 +10,7 @@ def load_audio_files(foldername, names):
         if filename.endswith(".wav"): #checks if it ends with mp3
             audio_files.append(os.path.join(filename)) #if it is an mp3 it adds it to the list 
 
-#// TODO This is redundant 
+#This is redundant 
             if "Gib" in filename: #checks if its a gibberish file 
                 for name in names: 
                     if name in filename: 
