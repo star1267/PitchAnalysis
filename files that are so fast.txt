@@ -1,0 +1,12 @@
+Duration: GibBella103.wav_2.41 seconds
+Duration: GibBella133.wav_2.83 seconds
+Duration: GibBella154.wav_4.74 seconds
+Duration: GibBella188.wav_3.85 seconds
+Duration: GibBella201.wav_3.81 seconds
+Duration: GibBella32.wav_4.41 seconds
+Duration: GibBella400.wav_3.85 seconds
+Duration: GibBella43.wav_4.32 seconds
+Duration: GibBella533.wav_3.95 seconds
+Duration: GibBella563.wav_2.55 seconds
+Duration: GibBella672.wav_4.27 seconds
+Duration: IEEEBella512.wav_5.71 seconds
