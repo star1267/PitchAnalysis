@@ -21,11 +21,7 @@ def extractfeatures(audio_file, names):
         pitch_max = parselmouth.praat.call(pitch, "Get maximum", 0, 0, "Hertz", "Parabolic") #max
         pitch_median = float(np.median(f0))
 
-        #write to dictionary 
-        #Mean[name].   append(pitch_mean) #write mean to dict for this voice 
-        #Median[name]. append(pitch_median) #write median to dict for this voice 
-
-                #write a dictionary 
+        #write a dictionary 
         dict[f] = {
             "filename": audio,
             "meanPitch": pitch_mean,

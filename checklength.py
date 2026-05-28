@@ -18,13 +18,14 @@ def checklength (GibFiles, IEEEFiles):
                     if duration < 4.90: 
                         print(f"Duration: {file}_{duration:.2f} seconds")
                 elif 'IEEE' in file:
-                    if duration > 5: 
+                    if duration < 2: 
                         print(f"Duration: {file}_{duration:.2f} seconds")
             maximum = max(durations)
             minimum = min(durations)
-        return (durations, maximum, minimum )
-    GibLength, GibMax, GibMin= calculate (GibFiles)
-    IEEELength, IEEEMax, IEEEMin= calculate (IEEEFiles)
+            average = np.average(durations)
+        return (durations, maximum, minimum, average )
+    GibLength, GibMax, GibMin, GibAve= calculate (GibFiles)
+    IEEELength, IEEEMax, IEEEMin, IEEEAve= calculate (IEEEFiles)
 
     print("IEEE Max" , IEEEMax, "Gib Min", GibMin )
 

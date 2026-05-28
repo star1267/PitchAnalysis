@@ -5,7 +5,7 @@ def load_audio_files(foldername, names):
     IEEEFiles = {key: [] for key in names} #Create an IEEE dict with the voices names 
     GibFiles =  {key: [] for key in names} #create an Gib dict with the voices names 
 
-    os.chdir(foldername)
+    os.chdir(foldername) #change folder
     for filename in os.listdir(path = '.'): #loops through each file
         if filename.endswith(".wav"): #checks if it ends with mp3
             audio_files.append(os.path.join(filename)) #if it is an mp3 it adds it to the list 
